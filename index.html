@@ -3,633 +3,769 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BMC Kuliner Bakso Nusantara</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <title>Mie Ayam Keluarga — Business Model Canvas</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --red:    #C0392B;
+      --red2:   #E74C3C;
+      --yellow: #F39C12;
+      --cream:  #FFF8F0;
+      --dark:   #1A0A00;
+      --brown:  #5C2D0E;
+      --warm:   #8B4513;
+      --light:  #FFF3E8;
+      --gray:   #6B5B4E;
+      --border: rgba(92,45,14,0.15);
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --blue-dark:   #1e3a8a;
-      --blue-main:   #2563eb;
-      --blue-mid:    #3b82f6;
-      --blue-light:  #bfdbfe;
-      --blue-soft:   #eff6ff;
-      --blue-bg:     #e8f0fe;
-      --green:       #16a34a;
-      --green-light: #dcfce7;
-      --wa-green:    #25d366;
-      --wa-dark:     #128c7e;
-      --text-dark:   #0f172a;
-      --text-mid:    #1e3a8a;
-      --text-soft:   #64748b;
-      --bg:          #dbeafe;
-      --card-bg:     #ffffff;
-      --border:      #bfdbfe;
-      --radius:      18px;
-      --radius-sm:   10px;
-      --shadow:      0 2px 12px rgba(37,99,235,0.10);
-      --shadow-hover:0 6px 24px rgba(37,99,235,0.18);
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text-dark);
+      background: var(--cream);
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 999;
+      background: rgba(26,10,0,0.95);
+      backdrop-filter: blur(10px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+      border-bottom: 2px solid var(--red);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem; color: var(--cream);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo span { color: var(--yellow); }
+    .nav-logo .dot { width: 8px; height: 8px; background: var(--yellow); border-radius: 50%; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,248,240,0.75); text-decoration: none;
+      font-size: .9rem; font-weight: 500; letter-spacing: .02em;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--yellow); }
+    .nav-btn {
+      background: var(--red); color: #fff;
+      padding: 10px 22px; border-radius: 25px;
+      text-decoration: none; font-size: .85rem; font-weight: 600;
+      transition: background .2s, transform .15s;
+    }
+    .nav-btn:hover { background: var(--red2); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
       min-height: 100vh;
-      padding: 32px 24px 48px;
-    }
-
-    /* ── HEADER ── */
-    header {
-      display: flex;
+      background: var(--dark);
+      display: grid; grid-template-columns: 1fr 1fr;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 44px; height: 44px;
-      background: var(--blue-main);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 22px;
-    }
-
-    .logo-text {
-      line-height: 1.2;
-    }
-
-    .logo-text strong {
-      display: block;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--blue-dark);
-    }
-
-    .logo-text span {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    header h1 {
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--blue-dark);
-      text-align: center;
-      flex: 1;
-    }
-
-    /* ── CONTAINER ── */
-    .bmc-container {
-      max-width: 1160px;
-      margin: 0 auto;
-    }
-
-    /* ── MAIN GRID (mengikuti layout gambar) ──
-       Kolom: [Key Partners] [Key Activities + Key Resources] [Value Proposition] [Customer Relationship + Channels] [Customer Segment]
-    */
-    .bmc-main {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1.1fr 1fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    /* Key Partners: span 2 rows */
-    #cell-kemitraan { grid-row: span 2; }
-
-    /* Value Proposition: span 2 rows */
-    #cell-nilai { grid-row: span 2; }
-
-    /* Customer Segment: span 2 rows */
-    #cell-segmen { grid-row: span 2; }
-
-    /* ── BOTTOM ROW ── */
-    .bmc-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    /* ── CARD BASE ── */
-    .bmc-cell {
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px 18px;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-      box-shadow: var(--shadow);
+      padding: 100px 7% 60px;
+      gap: 60px;
       position: relative;
       overflow: hidden;
     }
-
-    .bmc-cell:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-hover);
-      border-color: var(--blue-mid);
-    }
-
-    .bmc-cell.active {
-      border: 2px solid var(--blue-main);
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-2px);
-    }
-
-    /* top accent bar */
-    .bmc-cell::after {
+    #hero::before {
       content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--blue-main), var(--blue-mid));
-      opacity: 0;
-      transition: opacity 0.18s;
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(192,57,43,0.18) 0%, transparent 65%),
+                  radial-gradient(ellipse at 10% 80%, rgba(243,156,18,0.1) 0%, transparent 50%);
+      pointer-events: none;
     }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(192,57,43,0.2); border: 1px solid rgba(192,57,43,0.4);
+      padding: 6px 16px; border-radius: 20px;
+      font-size: .8rem; color: #FF8A75; font-weight: 600;
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-badge .pulse { width: 7px; height: 7px; background: var(--red2); border-radius: 50%; animation: pulse 1.8s infinite; }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.5);opacity:.6} }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      line-height: 1.1; color: var(--cream);
+      margin-bottom: 20px;
+    }
+    .hero-title em { font-style: italic; color: var(--yellow); }
+    .hero-desc {
+      font-size: 1.05rem; color: rgba(255,248,240,.65);
+      line-height: 1.75; max-width: 480px; margin-bottom: 36px;
+    }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--red); color: #fff;
+      padding: 14px 28px; border-radius: 8px;
+      text-decoration: none; font-weight: 700; font-size: .95rem;
+      transition: transform .15s, background .2s; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--red2); transform: translateY(-2px); }
+    .btn-secondary {
+      background: transparent; color: var(--cream);
+      border: 1.5px solid rgba(255,248,240,.25);
+      padding: 14px 28px; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: .95rem;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: var(--yellow); color: var(--yellow); }
 
-    .bmc-cell:hover::after,
-    .bmc-cell.active::after { opacity: 1; }
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 48px;
+      padding-top: 32px; border-top: 1px solid rgba(255,248,240,.1);
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 900; color: var(--yellow);
+      display: block;
+    }
+    .stat-lbl { font-size: .78rem; color: rgba(255,248,240,.5); font-weight: 500; letter-spacing: .05em; text-transform: uppercase; }
 
-    /* ── CELL NUMBER BADGE ── */
-    .cell-num {
-      position: absolute;
-      top: 12px; right: 14px;
-      width: 24px; height: 24px;
+    /* Hero visual */
+    .hero-visual {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-bowl {
+      width: 420px; height: 420px;
+      background: radial-gradient(circle at 40% 35%, #3D1A00 0%, #1A0A00 70%);
       border-radius: 50%;
-      background: var(--blue-soft);
-      border: 1.5px solid var(--blue-light);
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--blue-main);
       display: flex; align-items: center; justify-content: center;
-    }
-
-    /* ── CELL ICON ── */
-    .cell-icon {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      background: var(--blue-soft);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 26px;
-      margin: 0 auto 12px;
-    }
-
-    /* ── CELL TITLE ── */
-    .cell-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--blue-dark);
-      margin-bottom: 10px;
-      line-height: 1.35;
-      text-align: center;
-    }
-
-    /* ── CELL ITEMS ── */
-    .cell-items { list-style: none; }
-
-    .cell-items li {
-      font-size: 11.5px;
-      color: #334155;
-      padding: 3px 0 3px 13px;
+      font-size: 9rem;
+      box-shadow: 0 30px 80px rgba(192,57,43,0.35), 0 0 0 1px rgba(192,57,43,0.2);
+      animation: float 4s ease-in-out infinite;
       position: relative;
-      line-height: 1.5;
     }
-
-    .cell-items li::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 9px;
-      width: 5px; height: 5px;
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+    .hero-bowl::after {
+      content: ''; position: absolute; inset: -3px;
       border-radius: 50%;
-      background: var(--blue-mid);
+      background: conic-gradient(from 0deg, var(--red), var(--yellow), var(--red2), var(--red));
+      z-index: -1; opacity: .5;
+      animation: spin 8s linear infinite;
     }
-
-    /* ── TAGS ── */
-    .tag {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 600;
-      padding: 3px 8px;
-      border-radius: 99px;
-      margin: 3px 3px 0 0;
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .badge-float {
+      position: absolute; background: var(--cream);
+      border-radius: 12px; padding: 10px 16px;
+      font-weight: 700; font-size: .82rem; color: var(--dark);
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      display: flex; align-items: center; gap: 8px;
     }
+    .badge-float.b1 { top: 10%; left: -10%; animation: floatB 3.5s ease-in-out infinite; }
+    .badge-float.b2 { bottom: 15%; right: -8%; animation: floatB 4s ease-in-out infinite .8s; }
+    .badge-float.b3 { top: 55%; left: -15%; animation: floatB 3.8s ease-in-out infinite 1.4s; }
+    @keyframes floatB { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
 
-    .tag-blue   { background: #dbeafe; color: #1e40af; }
-    .tag-teal   { background: #ccfbf1; color: #0f5945; }
-    .tag-amber  { background: #fef3c7; color: #78350f; }
-    .tag-coral  { background: #fee2e2; color: #991b1b; }
-    .tag-green  { background: #dcfce7; color: #14532d; }
-    .tag-orange { background: #ffedd5; color: #c2410c; }
-
-    .badge-row { display: flex; flex-wrap: wrap; margin-top: 8px; justify-content: center; }
-
-    /* ── PROPOSISI NILAI — special dark card ── */
-    #cell-nilai {
-      background: linear-gradient(160deg, #1e3a8a 0%, #1d4ed8 55%, #2563eb 100%);
-      border-color: #1d4ed8;
+    /* ── SECTION COMMON ── */
+    section { padding: 90px 7%; }
+    .section-tag {
+      display: inline-block; background: rgba(192,57,43,.1);
+      color: var(--red); border: 1px solid rgba(192,57,43,.25);
+      padding: 5px 14px; border-radius: 20px;
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      margin-bottom: 14px;
     }
-
-    #cell-nilai .cell-icon  { background: rgba(255,255,255,0.15); }
-    #cell-nilai .cell-title { color: #ffffff; font-size: 15px; }
-    #cell-nilai .cell-items li { color: rgba(255,255,255,0.88); }
-    #cell-nilai .cell-items li::before { background: #93c5fd; }
-    #cell-nilai .cell-num   { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: #fff; }
-    #cell-nilai::after { background: linear-gradient(90deg, #93c5fd, #60a5fa); }
-
-    /* ── BOTTOM BIAYA ── */
-    #cell-biaya {
-      background: linear-gradient(145deg, #fff7ed, #fff);
-      border-color: #fed7aa;
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      line-height: 1.2; color: var(--dark); margin-bottom: 14px;
     }
-    #cell-biaya .cell-title { color: #9a3412; }
-    #cell-biaya .cell-num { background: #fff7ed; border-color: #fed7aa; color: #c2410c; }
-    #cell-biaya::after { background: linear-gradient(90deg, #f97316, #fbbf24); }
+    .section-sub { font-size: 1rem; color: var(--gray); max-width: 560px; line-height: 1.7; }
+    .section-head { margin-bottom: 52px; }
 
-    /* ── BOTTOM PENDAPATAN ── */
-    #cell-pendapatan {
-      background: linear-gradient(145deg, #f0fdf4, #fff);
-      border-color: #bbf7d0;
+    /* ── SCROLL TICKER ── */
+    .ticker {
+      background: var(--red); overflow: hidden;
+      padding: 14px 0; border-top: 2px solid var(--brown); border-bottom: 2px solid var(--brown);
     }
-    #cell-pendapatan .cell-title { color: #14532d; }
-    #cell-pendapatan .cell-num { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
-    #cell-pendapatan::after { background: linear-gradient(90deg, #16a34a, #22c55e); }
-
-    /* ── DETAIL PANEL ── */
-    #detail-panel {
-      display: none;
-      margin-top: 14px;
-      background: var(--card-bg);
-      border: 1.5px solid var(--border);
-      border-left: 4px solid var(--blue-main);
-      border-radius: var(--radius);
-      padding: 18px 22px;
-      box-shadow: var(--shadow);
-      animation: fadeIn 0.22s ease;
+    .ticker-inner {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: scroll 20s linear infinite;
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
+    .ticker-inner span {
+      font-size: .85rem; font-weight: 700; color: #fff; letter-spacing: .1em; text-transform: uppercase;
+      padding: 0 30px;
     }
+    .ticker-inner span::after { content: '✦'; margin-left: 30px; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
-    #detail-panel.show { display: block; }
-
-    .detail-header {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    /* ── MENU ── */
+    #menu { background: var(--light); }
+    .menu-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 24px;
     }
-
-    .detail-icon {
-      width: 36px; height: 36px;
-      border-radius: var(--radius-sm);
-      background: var(--blue-soft);
+    .menu-card {
+      background: #fff; border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+      cursor: default;
+    }
+    .menu-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(92,45,14,.12); }
+    .menu-img {
+      height: 180px; background: linear-gradient(135deg, #F5E6D3 0%, #E8C99A 100%);
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
+      font-size: 5rem; position: relative;
+    }
+    .menu-label {
+      position: absolute; top: 12px; right: 12px;
+      background: var(--red); color: #fff;
+      font-size: .7rem; font-weight: 700; padding: 4px 10px; border-radius: 20px;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .menu-body { padding: 20px; }
+    .menu-name { font-weight: 700; font-size: 1.05rem; margin-bottom: 6px; color: var(--dark); }
+    .menu-desc { font-size: .85rem; color: var(--gray); line-height: 1.6; margin-bottom: 14px; }
+    .menu-price { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--red); font-weight: 700; }
+
+    /* ── BMC ── */
+    #bmc { background: var(--dark); color: var(--cream); }
+    #bmc .section-title { color: var(--cream); }
+    #bmc .section-sub { color: rgba(255,248,240,.55); }
+    #bmc .section-tag { background: rgba(243,156,18,.15); color: var(--yellow); border-color: rgba(243,156,18,.3); }
+
+    .bmc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 3px;
+      background: rgba(255,248,240,.06);
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid rgba(255,248,240,.08);
+    }
+    .bmc-cell {
+      background: rgba(255,255,255,.04);
+      padding: 24px 22px;
+      border: 1px solid rgba(255,248,240,.07);
+      transition: background .2s;
+    }
+    .bmc-cell:hover { background: rgba(192,57,43,.12); }
+    .bmc-cell.span-col-2 { grid-column: span 2; }
+    .bmc-cell.vp { grid-column: 3 / 4; grid-row: 1 / 3; border: 1px solid rgba(243,156,18,.35); background: rgba(243,156,18,.06); }
+    .bmc-cell.cost { grid-column: 1 / 4; }
+    .bmc-cell.revenue { grid-column: 4 / 6; }
+    .bmc-bottom { display: grid; grid-template-columns: 3fr 2fr; gap: 3px; }
+
+    .bmc-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .bmc-label {
+      font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--yellow); margin-bottom: 12px;
+    }
+    .bmc-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--cream); margin-bottom: 12px; }
+    .bmc-list { list-style: none; }
+    .bmc-list li {
+      font-size: .82rem; color: rgba(255,248,240,.7);
+      padding: 5px 0; border-bottom: 1px solid rgba(255,248,240,.06);
+      line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 8px;
+    }
+    .bmc-list li::before { content: '›'; color: var(--yellow); font-size: 1rem; flex-shrink: 0; }
+    .bmc-list li:last-child { border-bottom: none; }
+    .vp .bmc-title { font-size: 1.2rem; }
+    .vp .bmc-list li { font-size: .88rem; }
+
+    /* bottom row */
+    .bmc-row-bottom {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 3px; border-top: 3px solid rgba(255,248,240,.06);
     }
 
-    #detail-panel h3 {
-      font-size: 15px; font-weight: 700; color: var(--blue-dark);
+    /* ── ABOUT ── */
+    #about {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
     }
+    .about-visual {
+      background: linear-gradient(135deg, #F5E0C8 0%, #E8C99A 100%);
+      border-radius: 20px; height: 480px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 8rem;
+      position: relative; overflow: hidden;
+    }
+    .about-visual::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 30% 70%, rgba(192,57,43,.2), transparent 60%);
+    }
+    .about-badges { display: flex; flex-direction: column; gap: 14px; margin-top: 32px; }
+    .about-badge {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--light); border: 1px solid var(--border);
+      border-radius: 12px; padding: 14px 18px;
+    }
+    .about-badge .ico { font-size: 1.5rem; }
+    .about-badge .txt strong { display: block; font-size: .9rem; font-weight: 700; color: var(--dark); }
+    .about-badge .txt span { font-size: .8rem; color: var(--gray); }
 
-    #detail-panel p {
-      font-size: 13px; color: #334155;
-      line-height: 1.75;
-      padding-left: 12px;
-      border-left: 3px solid var(--blue-mid);
-      margin-bottom: 10px;
+    /* ── CONTACT ── */
+    #contact { background: var(--light); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .contact-cards { display: flex; flex-direction: column; gap: 16px; }
+    .contact-card {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 22px;
+      display: flex; align-items: center; gap: 16px;
+      text-decoration: none; transition: transform .2s, box-shadow .2s;
     }
-
-    /* ── WA BUTTON ── */
-    .wa-section {
-      margin-top: 20px;
-      text-align: center;
+    .contact-card:hover { transform: translateX(6px); box-shadow: 0 8px 24px rgba(92,45,14,.08); }
+    .contact-card .c-ico { font-size: 2rem; width: 52px; text-align: center; }
+    .contact-card .c-info strong { display: block; font-size: .95rem; color: var(--dark); font-weight: 700; }
+    .contact-card .c-info span { font-size: .82rem; color: var(--gray); }
+    .map-placeholder {
+      background: linear-gradient(135deg, #E8D5C4 0%, #D4B896 100%);
+      border-radius: 16px; height: 300px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px; color: var(--brown);
     }
-
-    .wa-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--wa-green);
-      color: #ffffff;
-      text-decoration: none;
-      font-size: 15px;
-      font-weight: 700;
-      padding: 14px 28px;
-      border-radius: 99px;
-      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
-      transition: transform 0.16s, box-shadow 0.16s, background 0.16s;
-      cursor: pointer;
-      border: none;
-    }
-
-    .wa-btn:hover {
-      background: var(--wa-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(37,211,102,0.4);
-    }
-
-    .wa-btn svg {
-      width: 22px; height: 22px; fill: #fff; flex-shrink: 0;
-    }
-
-    .wa-note {
-      margin-top: 8px;
-      font-size: 12px;
-      color: var(--text-soft);
-    }
+    .map-placeholder .map-ico { font-size: 3rem; }
+    .map-placeholder p { font-weight: 600; font-size: .95rem; }
+    .map-placeholder small { font-size: .8rem; opacity: .7; }
 
     /* ── FOOTER ── */
     footer {
-      text-align: center;
-      margin-top: 32px;
-      font-size: 12px;
-      color: var(--text-soft);
+      background: var(--dark);
+      color: rgba(255,248,240,.5);
+      padding: 50px 7% 30px;
     }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px; padding-bottom: 36px;
+      border-bottom: 1px solid rgba(255,248,240,.08);
+      margin-bottom: 26px;
+    }
+    .footer-brand p { font-size: .88rem; line-height: 1.7; margin-top: 12px; max-width: 300px; }
+    .footer-nav h4 { color: var(--cream); font-size: .85rem; font-weight: 700; margin-bottom: 14px; letter-spacing: .05em; }
+    .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-nav a { color: rgba(255,248,240,.5); text-decoration: none; font-size: .85rem; transition: color .2s; }
+    .footer-nav a:hover { color: var(--yellow); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: .8rem; flex-wrap: wrap; gap: 10px; }
+    .footer-bottom strong { color: var(--cream); }
 
-    footer strong { color: var(--blue-main); }
+    /* ── SCROLL REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(30px); transition: opacity .6s, transform .6s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width: 900px) {
+      #hero { grid-template-columns: 1fr; text-align: center; padding-top: 120px; }
+      .hero-visual { display: none; }
+      .hero-btns { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .bmc-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: unset;
+      }
+      .bmc-cell.vp { grid-column: 1 / 3; grid-row: unset; }
+      .bmc-row-bottom { grid-template-columns: 1fr; }
+      #about { grid-template-columns: 1fr; }
+      .about-visual { height: 240px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      nav .nav-links { display: none; }
+    }
   </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo-area">
-    <div class="logo-icon">🍜</div>
-    <div class="logo-text">
-      <strong>Bakso Nusantara</strong>
-      <span>Kuliner Autentik Indonesia</span>
+<!-- NAVBAR -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span>🍜</span> Mie Ayam <span>Keluarga</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#bmc">Business Model Canvas</a></li>
+    <li><a href="#about">Tentang</a></li>
+    <li><a href="#contact">Kontak</a></li>
+  </ul>
+  <a href="#contact" class="nav-btn">Hubungi Kami</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <div class="hero-badge">
+      <span class="pulse"></span> Usaha Kuliner Keluarga
     </div>
-  </div>
-  <h1>Business Model Canvas</h1>
-  <div style="width:180px;"></div><!-- spacer -->
-</header>
-
-<div class="bmc-container">
-
-  <!-- MAIN GRID -->
-  <div class="bmc-main">
-
-    <!-- 8. Key Partners / Kemitraan Utama (span 2 rows) -->
-    <div class="bmc-cell" id="cell-kemitraan" onclick="showDetail('kemitraan')">
-      <div class="cell-num">8</div>
-      <div class="cell-icon">🤝</div>
-      <div class="cell-title">Key Partners</div>
-      <ul class="cell-items">
-        <li>Pemasok daging segar</li>
-        <li>Pemasok bumbu &amp; rempah</li>
-        <li>Mitra GoFood / GrabFood</li>
-        <li>Toko kemasan &amp; wadah</li>
-        <li>Usaha minuman / es</li>
-        <li>Penyedia gas &amp; listrik</li>
-      </ul>
+    <h1 class="hero-title">
+      Mie Ayam Lezat,<br>Resep <em>Warisan</em><br>Keluarga
+    </h1>
+    <p class="hero-desc">
+      Mie Ayam Keluarga hadir dengan cita rasa autentik, menggunakan bahan segar pilihan
+      dan kuah kaldu istimewa yang dimasak dengan penuh cinta — cocok untuk semua kalangan.
+    </p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn-primary">🍜 Lihat Menu</a>
+      <a href="#bmc" class="btn-secondary">Pelajari Bisnis Kami</a>
     </div>
-
-    <!-- 7. Key Activities -->
-    <div class="bmc-cell" id="cell-aktivitas" onclick="showDetail('aktivitas')">
-      <div class="cell-num">7</div>
-      <div class="cell-icon">🎯</div>
-      <div class="cell-title">Key Activities</div>
-      <ul class="cell-items">
-        <li>Produksi bakso harian</li>
-        <li>Manajemen stok bahan</li>
-        <li>Pelayanan pelanggan</li>
-        <li>Promosi media sosial</li>
-        <li>Pengelolaan pesanan online</li>
-      </ul>
-    </div>
-
-    <!-- 2. Value Proposition (span 2 rows) -->
-    <div class="bmc-cell" id="cell-nilai" onclick="showDetail('nilai')">
-      <div class="cell-num">2</div>
-      <div class="cell-icon">👍</div>
-      <div class="cell-title">Value Proposition</div>
-      <ul class="cell-items">
-        <li>Bakso handmade autentik</li>
-        <li>Bahan segar &amp; halal</li>
-        <li>Harga terjangkau</li>
-        <li>Varian menu beragam</li>
-        <li>Kuah kaldu kaya rasa</li>
-        <li>Pelayanan cepat</li>
-        <li>Tersedia frozen bakso</li>
-      </ul>
-      <div class="badge-row">
-        <span class="tag" style="background:rgba(255,255,255,0.2);color:#e0f2fe;">Halal</span>
-        <span class="tag" style="background:rgba(255,255,255,0.15);color:#bae6fd;">Segar</span>
-        <span class="tag" style="background:rgba(255,255,255,0.15);color:#fde68a;">Handmade</span>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">8+</span>
+        <span class="stat-lbl">Varian Menu</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">Rp 12k</span>
+        <span class="stat-lbl">Mulai Dari</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-lbl">Halal & Segar</span>
       </div>
     </div>
+  </div>
+  <div class="hero-visual">
+    <div style="position:relative; display:inline-block;">
+      <div class="hero-bowl">🍜</div>
+      <div class="badge-float b1">⭐ Rating 4.9/5</div>
+      <div class="badge-float b2">🔥 Terlaris Hari Ini</div>
+      <div class="badge-float b3">✅ Tanpa MSG</div>
+    </div>
+  </div>
+</section>
 
-    <!-- 4. Customer Relationship -->
-    <div class="bmc-cell" id="cell-hubungan" onclick="showDetail('hubungan')">
-      <div class="cell-num">4</div>
-      <div class="cell-icon">🤲</div>
-      <div class="cell-title">Customer Relationship</div>
-      <ul class="cell-items">
-        <li>Layanan ramah langsung</li>
-        <li>Program pelanggan setia</li>
-        <li>Respon cepat di WA / IG</li>
-        <li>Promo member &amp; diskon</li>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span>Mie Ayam Original</span><span>Mie Ayam Bakso</span><span>Mie Ayam Jamur</span>
+    <span>Mie Ayam Spesial</span><span>Mie Goreng Ayam</span><span>100% Halal</span>
+    <span>Bahan Segar Pilihan</span><span>Kuah Kaldu Spesial</span>
+    <span>Mie Ayam Original</span><span>Mie Ayam Bakso</span><span>Mie Ayam Jamur</span>
+    <span>Mie Ayam Spesial</span><span>Mie Goreng Ayam</span><span>100% Halal</span>
+    <span>Bahan Segar Pilihan</span><span>Kuah Kaldu Spesial</span>
+  </div>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-head reveal">
+    <span class="section-tag">Menu Unggulan</span>
+    <h2 class="section-title">Pilihan Menu <br>Mie Ayam Kami</h2>
+    <p class="section-sub">Setiap mangkuk disajikan dengan mie segar, ayam berbumbu, dan kuah kaldu hangat yang menggugah selera.</p>
+  </div>
+  <div class="menu-grid">
+    <div class="menu-card reveal">
+      <div class="menu-img">🍜<span class="menu-label">Terlaris</span></div>
+      <div class="menu-body">
+        <div class="menu-name">Mie Ayam Original</div>
+        <div class="menu-desc">Mie kenyal dengan topping ayam berbumbu khas, dilengkapi kuah kaldu gurih dan caisim segar.</div>
+        <div class="menu-price">Rp 12.000</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-img">🍖<span class="menu-label">Favorit</span></div>
+      <div class="menu-body">
+        <div class="menu-name">Mie Ayam Bakso</div>
+        <div class="menu-desc">Kombinasi mie ayam original ditambah bakso sapi kenyal berukuran besar yang lezat.</div>
+        <div class="menu-price">Rp 16.000</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-img">🍄<span class="menu-label">Rekomendasi</span></div>
+      <div class="menu-body">
+        <div class="menu-name">Mie Ayam Jamur</div>
+        <div class="menu-desc">Paduan sempurna mie ayam dengan jamur tiram tumis yang lembut dan gurih.</div>
+        <div class="menu-price">Rp 15.000</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-img">⭐</div>
+      <div class="menu-body">
+        <div class="menu-name">Mie Ayam Spesial</div>
+        <div class="menu-desc">Versi premium dengan topping lengkap: ayam, bakso, jamur, pangsit rebus, dan telur puyuh.</div>
+        <div class="menu-price">Rp 22.000</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-img">🥘</div>
+      <div class="menu-body">
+        <div class="menu-name">Mie Goreng Ayam</div>
+        <div class="menu-desc">Mie goreng dengan bumbu kecap spesial, topping ayam suwir, dan irisan cabai merah segar.</div>
+        <div class="menu-price">Rp 14.000</div>
+      </div>
+    </div>
+    <div class="menu-card reveal">
+      <div class="menu-img">🥟</div>
+      <div class="menu-body">
+        <div class="menu-name">Pangsit Goreng / Rebus</div>
+        <div class="menu-desc">Pangsit isi daging ayam cincang berbumbu, bisa goreng renyah atau rebus lembut sesuai selera.</div>
+        <div class="menu-price">Rp 8.000</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BMC -->
+<section id="bmc">
+  <div class="section-head reveal">
+    <span class="section-tag">Kerangka Bisnis</span>
+    <h2 class="section-title">Business Model Canvas</h2>
+    <p class="section-sub">Gambaran lengkap model bisnis Mie Ayam Keluarga dalam satu kerangka strategis.</p>
+  </div>
+
+  <!-- ROW 1: KP | KA | VP | CR | CS -->
+  <div class="bmc-grid reveal">
+    <div class="bmc-cell">
+      <div class="bmc-icon">🤝</div>
+      <div class="bmc-label">Key Partners</div>
+      <div class="bmc-title">Mitra Utama</div>
+      <ul class="bmc-list">
+        <li>Supplier ayam segar & daging</li>
+        <li>Pemasok mie segar lokal</li>
+        <li>Toko bumbu & rempah</li>
+        <li>Jasa pengiriman GoFood/GrabFood</li>
+        <li>Supplier peralatan dapur</li>
+      </ul>
+    </div>
+    <div class="bmc-cell">
+      <div class="bmc-icon">⚙️</div>
+      <div class="bmc-label">Key Activities</div>
+      <div class="bmc-title">Aktivitas Kunci</div>
+      <ul class="bmc-list">
+        <li>Memasak & menyiapkan mie ayam</li>
+        <li>Pengelolaan warung & kasir</li>
+        <li>Promosi via media sosial</li>
+        <li>Pengelolaan pesanan online</li>
+        <li>Menjaga kualitas rasa konsisten</li>
+      </ul>
+    </div>
+    <div class="bmc-cell vp">
+      <div class="bmc-icon">💎</div>
+      <div class="bmc-label">Value Proposition</div>
+      <div class="bmc-title">Proposisi Nilai</div>
+      <ul class="bmc-list">
+        <li>Cita rasa autentik resep warisan keluarga</li>
+        <li>Harga terjangkau mulai Rp 12.000</li>
+        <li>Bahan segar, halal & tanpa pengawet</li>
+        <li>Kuah kaldu dimasak dari tulang ayam asli</li>
+        <li>Variasi menu lengkap sesuai selera</li>
+        <li>Porsi kenyang & memuaskan</li>
+        <li>Layanan cepat & ramah</li>
+      </ul>
+    </div>
+    <div class="bmc-cell">
+      <div class="bmc-icon">💬</div>
+      <div class="bmc-label">Customer Relations</div>
+      <div class="bmc-title">Hubungan Pelanggan</div>
+      <ul class="bmc-list">
+        <li>Layanan langsung di warung</li>
+        <li>Promo pelanggan setia</li>
+        <li>Respon aktif di WhatsApp</li>
+        <li>Testimoni di Instagram & TikTok</li>
+        <li>Program diskon ulang tahun</li>
+      </ul>
+    </div>
+    <div class="bmc-cell">
+      <div class="bmc-icon">👥</div>
+      <div class="bmc-label">Customer Segments</div>
+      <div class="bmc-title">Segmen Pelanggan</div>
+      <ul class="bmc-list">
+        <li>Pelajar & mahasiswa</li>
+        <li>Karyawan & pekerja kantoran</li>
+        <li>Keluarga & ibu rumah tangga</li>
+        <li>Pencinta kuliner lokal</li>
+        <li>Pelanggan GoFood / GrabFood</li>
       </ul>
     </div>
 
-    <!-- 1. Customer Segment (span 2 rows) -->
-    <div class="bmc-cell" id="cell-segmen" onclick="showDetail('segmen')">
-      <div class="cell-num">1</div>
-      <div class="cell-icon">👥</div>
-      <div class="cell-title">Customer Segment</div>
-      <ul class="cell-items">
-        <li>Keluarga &amp; rumah tangga</li>
-        <li>Pelajar &amp; mahasiswa</li>
-        <li>Pekerja kantoran</li>
-        <li>Reseller frozen food</li>
-        <li>Pelanggan online</li>
-        <li>Pengguna ojek online</li>
+    <!-- ROW 2: KR (span 2) | [VP continues] | Channels (span 2) -->
+    <div class="bmc-cell span-col-2">
+      <div class="bmc-icon">🏪</div>
+      <div class="bmc-label">Key Resources</div>
+      <div class="bmc-title">Sumber Daya Utama</div>
+      <ul class="bmc-list">
+        <li>Warung / gerobak mie ayam</li>
+        <li>Peralatan masak & kompor</li>
+        <li>SDM juru masak & pelayan</li>
+        <li>Resep rahasia keluarga</li>
+        <li>Bahan baku mie, ayam & bumbu</li>
       </ul>
     </div>
-
-    <!-- 6. Key Resources -->
-    <div class="bmc-cell" id="cell-sumber" onclick="showDetail('sumber')">
-      <div class="cell-num">6</div>
-      <div class="cell-icon">🏭</div>
-      <div class="cell-title">Key Resources</div>
-      <ul class="cell-items">
-        <li>Dapur produksi</li>
-        <li>Peralatan memasak</li>
-        <li>Tenaga koki &amp; pramusaji</li>
-        <li>Gerobak / warung</li>
-        <li>Akun media sosial</li>
+    <div class="bmc-cell span-col-2">
+      <div class="bmc-icon">📢</div>
+      <div class="bmc-label">Channels</div>
+      <div class="bmc-title">Saluran Distribusi</div>
+      <ul class="bmc-list">
+        <li>Warung makan langsung (dine-in)</li>
+        <li>GoFood & GrabFood (delivery)</li>
+        <li>WhatsApp & Instagram order</li>
+        <li>Catering & pesanan acara</li>
+        <li>Word-of-mouth pelanggan</li>
       </ul>
     </div>
-
-    <!-- 3. Channels -->
-    <div class="bmc-cell" id="cell-saluran" onclick="showDetail('saluran')">
-      <div class="cell-num">3</div>
-      <div class="cell-icon">📣</div>
-      <div class="cell-title">Channels</div>
-      <ul class="cell-items">
-        <li>Warung / outlet fisik</li>
-        <li>GoFood &amp; GrabFood</li>
-        <li>WhatsApp &amp; Instagram</li>
-        <li>Catering &amp; event</li>
-        <li>Titipan warung lain</li>
-      </ul>
-    </div>
-
-  </div><!-- /.bmc-main -->
+  </div>
 
   <!-- BOTTOM ROW -->
-  <div class="bmc-bottom">
-
-    <!-- 9. Cost Structure -->
-    <div class="bmc-cell" id="cell-biaya" onclick="showDetail('biaya')">
-      <div class="cell-num">9</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-        <div class="cell-icon" style="background:#fff7ed;margin:0;width:44px;height:44px;font-size:22px;">💸</div>
-        <div class="cell-title" style="margin:0;text-align:left;">Cost Structure &mdash; Money Out</div>
-      </div>
-      <div class="badge-row" style="justify-content:flex-start;">
-        <span class="tag tag-orange">Daging &amp; bahan baku</span>
-        <span class="tag tag-orange">Gaji karyawan</span>
-        <span class="tag tag-orange">Sewa tempat</span>
-        <span class="tag tag-orange">Gas &amp; listrik</span>
-        <span class="tag tag-orange">Kemasan &amp; peralatan</span>
-        <span class="tag tag-orange">Biaya platform online</span>
-        <span class="tag tag-orange">Promosi &amp; iklan</span>
-      </div>
+  <div class="bmc-row-bottom reveal" style="margin-top: 3px;">
+    <div class="bmc-cell" style="border-radius: 0 0 0 16px;">
+      <div class="bmc-icon">💰</div>
+      <div class="bmc-label">Cost Structure</div>
+      <div class="bmc-title">Struktur Biaya</div>
+      <ul class="bmc-list" style="columns: 2; gap: 20px;">
+        <li>Pembelian ayam & bahan baku harian</li>
+        <li>Sewa tempat & listrik operasional</li>
+        <li>Gaji karyawan & tenaga masak</li>
+        <li>Biaya kemasan & peralatan makan</li>
+        <li>Biaya promosi & konten sosial media</li>
+        <li>Komisi platform GoFood / GrabFood</li>
+      </ul>
     </div>
-
-    <!-- 5. Revenue Streams -->
-    <div class="bmc-cell" id="cell-pendapatan" onclick="showDetail('pendapatan')">
-      <div class="cell-num">5</div>
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
-        <div class="cell-icon" style="background:#f0fdf4;margin:0;width:44px;height:44px;font-size:22px;">💰</div>
-        <div class="cell-title" style="margin:0;text-align:left;">Revenue Streams &mdash; Money In</div>
-      </div>
-      <div class="badge-row" style="justify-content:flex-start;">
-        <span class="tag tag-teal">Penjualan per porsi</span>
-        <span class="tag tag-teal">Penjualan frozen bakso</span>
-        <span class="tag tag-teal">Paket catering</span>
-        <span class="tag tag-teal">Langganan mingguan</span>
-        <span class="tag tag-teal">Kemitraan reseller</span>
-        <span class="tag tag-green">Orderan online (app)</span>
-      </div>
+    <div class="bmc-cell" style="border-radius: 0 0 16px 0;">
+      <div class="bmc-icon">📈</div>
+      <div class="bmc-label">Revenue Streams</div>
+      <div class="bmc-title">Aliran Pendapatan</div>
+      <ul class="bmc-list">
+        <li>Penjualan langsung per porsi mie ayam</li>
+        <li>Pesanan delivery via GoFood/GrabFood</li>
+        <li>Paket catering acara & hajatan</li>
+        <li>Penjualan minuman & es jeruk</li>
+        <li>Pesanan khusus & bulk order</li>
+      </ul>
     </div>
-
-  </div><!-- /.bmc-bottom -->
-
-  <!-- DETAIL PANEL -->
-  <div id="detail-panel">
-    <div class="detail-header">
-      <div class="detail-icon" id="detail-icon"></div>
-      <h3 id="detail-title"></h3>
-    </div>
-    <p id="detail-desc"></p>
-    <div class="badge-row" id="detail-badges" style="justify-content:flex-start;"></div>
   </div>
+</section>
 
-  <!-- TOMBOL HUBUNGI WA -->
-  <div class="wa-section">
-    <a class="wa-btn" href="https://wa.me/6283169562638?text=Halo%20Bakso%20Nusantara!%20Saya%20ingin%20memesan%20bakso." target="_blank">
-      <!-- WhatsApp SVG icon -->
-      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-        <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.418-2.004A15.938 15.938 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.77-1.852l-.486-.29-5.003 1.191 1.22-4.872-.317-.5A13.27 13.27 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.27-9.907c-.398-.199-2.356-1.163-2.72-1.296-.366-.133-.632-.199-.898.199-.266.398-1.03 1.296-1.263 1.562-.232.266-.465.299-.863.1-.398-.199-1.681-.619-3.202-1.977-1.183-1.056-1.982-2.36-2.215-2.758-.232-.398-.025-.614.175-.812.18-.18.398-.465.598-.698.199-.232.265-.398.398-.664.133-.266.066-.498-.033-.697-.1-.199-.898-2.165-1.23-2.964-.323-.778-.653-.672-.898-.684l-.764-.013c-.266 0-.698.1-1.063.498-.366.398-1.396 1.363-1.396 3.323s1.43 3.855 1.629 4.121c.2.266 2.815 4.298 6.82 6.029.953.411 1.697.657 2.277.841.957.304 1.828.261 2.516.158.767-.114 2.356-.964 2.688-1.895.333-.93.333-1.729.233-1.895-.1-.166-.366-.266-.764-.465z"/>
-      </svg>
-      Hubungi Kami via WhatsApp
-    </a>
-    <p class="wa-note">Pemesanan, informasi menu, dan kemitraan reseller</p>
+<!-- ABOUT -->
+<section id="about" style="padding: 90px 7%;">
+  <div class="about-visual reveal">🍜</div>
+  <div class="reveal">
+    <span class="section-tag">Tentang Kami</span>
+    <h2 class="section-title">Dari Dapur Keluarga,<br>untuk Semua Orang</h2>
+    <p class="section-sub" style="margin-bottom: 32px;">
+      Mie Ayam Keluarga adalah usaha kuliner berbasis keluarga yang lahir dari semangat
+      menyajikan makanan lezat, bergizi, dan terjangkau untuk masyarakat Indonesia.
+      Kami menggunakan resep turun-temurun yang terus dijaga kualitasnya.
+    </p>
+    <div class="about-badges">
+      <div class="about-badge">
+        <span class="ico">🥩</span>
+        <div class="txt">
+          <strong>Bahan Baku Segar Setiap Hari</strong>
+          <span>Ayam dan sayuran dibeli langsung dari pasar lokal setiap pagi</span>
+        </div>
+      </div>
+      <div class="about-badge">
+        <span class="ico">✅</span>
+        <div class="txt">
+          <strong>Halal, Higienis & Tanpa Pengawet</strong>
+          <span>Proses memasak bersih dan terjamin tidak menggunakan MSG berlebih</span>
+        </div>
+      </div>
+      <div class="about-badge">
+        <span class="ico">🤝</span>
+        <div class="txt">
+          <strong>Melayani Catering & Pesanan Khusus</strong>
+          <span>Tersedia layanan catering untuk acara keluarga, arisan, dan hajatan</span>
+        </div>
+      </div>
+    </div>
   </div>
+</section>
 
-</div><!-- /.bmc-container -->
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-head reveal">
+    <span class="section-tag">Hubungi Kami</span>
+    <h2 class="section-title">Temukan Kami</h2>
+    <p class="section-sub">Kunjungi warung kami atau hubungi langsung untuk pemesanan dan informasi lebih lanjut.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-cards reveal">
+      <a href="https://wa.me/6281234567890" class="contact-card" target="_blank">
+        <span class="c-ico">📱</span>
+        <div class="c-info">
+          <strong>WhatsApp</strong>
+          <span>+62 812-3456-7890</span>
+        </div>
+      </a>
+      <a href="#" class="contact-card">
+        <span class="c-ico">📸</span>
+        <div class="c-info">
+          <strong>Instagram</strong>
+          <span>@mieayamkeluarga</span>
+        </div>
+      </a>
+      <a href="#" class="contact-card">
+        <span class="c-ico">📍</span>
+        <div class="c-info">
+          <strong>Lokasi Warung</strong>
+          <span>Jl. Contoh No. 1, Bandar Lampung</span>
+        </div>
+      </a>
+      <a href="#" class="contact-card">
+        <span class="c-ico">🕐</span>
+        <div class="c-info">
+          <strong>Jam Buka</strong>
+          <span>Senin – Sabtu, 07.00 – 20.00 WIB</span>
+        </div>
+      </a>
+    </div>
+    <div class="map-placeholder reveal">
+      <div class="map-ico">🗺️</div>
+      <p>Warung Mie Ayam Keluarga</p>
+      <small>Bandar Lampung, Lampung</small>
+    </div>
+  </div>
+</section>
 
+<!-- FOOTER -->
 <footer>
-  &copy; 2025 <strong>Bakso Nusantara</strong> &mdash; Business Model Canvas
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div style="font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--cream);">
+        🍜 Mie Ayam <span style="color:var(--yellow);">Keluarga</span>
+      </div>
+      <p>Mie ayam premium berbahan segar dengan cita rasa autentik resep warisan keluarga untuk semua kalangan.</p>
+    </div>
+    <div class="footer-nav">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#bmc">Business Model Canvas</a></li>
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>Kontak</h4>
+      <ul>
+        <li><a href="#">📱 WhatsApp</a></li>
+        <li><a href="#">📸 Instagram</a></li>
+        <li><a href="#">🛵 GoFood</a></li>
+        <li><a href="#">📍 Lokasi</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 <strong>Mie Ayam Keluarga</strong>. All rights reserved.</span>
+    <span>Business Model Canvas — Tugas Web</span>
+  </div>
 </footer>
 
 <script>
-  const details = {
-    kemitraan: {
-      icon: "🤝",
-      title: "Key Partners — Kemitraan Utama",
-      desc: "Bangun relasi jangka panjang dengan pemasok daging sapi/ayam segar dan terpercaya. Daftarkan usaha di GoFood & GrabFood untuk memperluas jangkauan. Jalin kerjasama dengan produsen kemasan food-grade dan mitra es/minuman untuk paket lengkap.",
-      badges: [["Pemasok Daging","teal"],["Platform Ojol","blue"],["Mitra Kemasan","amber"]]
-    },
-    aktivitas: {
-      icon: "🎯",
-      title: "Key Activities — Aktivitas Utama",
-      desc: "Proses produksi bakso dilakukan setiap hari mulai pagi dengan bahan segar. Kelola stok bahan baku agar tidak boros. Aktif posting konten di Instagram & TikTok setiap hari untuk menarik pelanggan baru. Pastikan semua pesanan online direspons dalam 5 menit.",
-      badges: [["Produksi Harian","teal"],["Social Media","blue"],["QC Kualitas","amber"]]
-    },
-    nilai: {
-      icon: "👍",
-      title: "Value Proposition — Proposisi Nilai",
-      desc: "Keunggulan utama: bakso dibuat dengan tangan (handmade) dari daging sapi pilihan, kuah kaldu alami tanpa MSG berlebih, varian menu lengkap (bakso urat, telur, mercon, kuah spesial), serta tersedia dalam kemasan frozen untuk dibawa pulang atau dijual kembali.",
-      badges: [["Handmade","teal"],["Halal MUI","green"],["No Pengawet","amber"],["Frozen Ready","blue"]]
-    },
-    hubungan: {
-      icon: "🤲",
-      title: "Customer Relationship — Hubungan Pelanggan",
-      desc: "Buat program stamp card — beli 9 porsi gratis 1. Responsif di WhatsApp Business untuk pesanan. Bagikan promo mingguan di status WA dan Instagram Stories. Minta ulasan Google Maps dan balas semua komentar dengan profesional.",
-      badges: [["Stamp Card","teal"],["WA Business","blue"],["Google Review","amber"]]
-    },
-    segmen: {
-      icon: "👥",
-      title: "Customer Segment — Segmen Pelanggan",
-      desc: "Target utama adalah keluarga yang mencari makanan lezat terjangkau, pelajar/mahasiswa di sekitar kampus, dan pekerja untuk makan siang. Segmen sekunder: reseller frozen bakso dan pelanggan katering untuk acara arisan, ulang tahun, dan kantor.",
-      badges: [["Keluarga","teal"],["Mahasiswa","blue"],["Pekerja Kantoran","amber"],["Reseller","coral"]]
-    },
-    sumber: {
-      icon: "🏭",
-      title: "Key Resources — Sumber Daya Utama",
-      desc: "Investasi awal pada dapur produksi yang bersih dan peralatan (mesin penggiling, kompor besar, panci kaldu). Rekrut 1–2 karyawan terlatih. Buat konten foto/video berkualitas untuk media sosial sebagai aset digital. Gerobak atau etalase sebagai wajah brand.",
-      badges: [["Dapur Produksi","teal"],["SDM Terlatih","blue"],["Konten Digital","amber"]]
-    },
-    saluran: {
-      icon: "📣",
-      title: "Channels — Saluran Distribusi",
-      desc: "Outlet fisik sebagai saluran utama. Optimalkan GoFood dan GrabFood dengan foto menu menarik dan rating tinggi. Manfaatkan Instagram & TikTok untuk marketing organik. Tawarkan paket catering untuk event. Titipkan produk frozen ke warung/minimarket sekitar.",
-      badges: [["Outlet Fisik","teal"],["GoFood/Grab","blue"],["IG & TikTok","coral"],["Catering","amber"]]
-    },
-    biaya: {
-      icon: "💸",
-      title: "Cost Structure — Struktur Biaya",
-      desc: "Biaya terbesar adalah bahan baku (daging ~40–50% dari revenue). Kendalikan dengan pembelian dalam jumlah besar dari supplier tetap. Biaya sewa, gaji, dan utilitas bersifat tetap. Biaya platform ojol ~15–20% dari omzet online — perlu diperhitungkan dalam harga jual.",
-      badges: [["COGS ~50%","coral"],["Fixed Cost","amber"],["Biaya Platform","blue"]]
-    },
-    pendapatan: {
-      icon: "💰",
-      title: "Revenue Streams — Arus Pendapatan",
-      desc: "Pendapatan utama dari penjualan per porsi (Rp 15.000–35.000). Diversifikasi dengan frozen bakso (margin lebih tinggi), paket catering (volume besar), dan sistem langganan mingguan. Kemitraan reseller membuka pendapatan B2B tanpa harus melayani langsung.",
-      badges: [["Per Porsi","teal"],["Frozen Pack","blue"],["Catering","amber"],["Reseller B2B","coral"]]
-    }
-  };
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
 
-  function showDetail(key) {
-    document.querySelectorAll('.bmc-cell').forEach(el => el.classList.remove('active'));
-    const clicked = document.getElementById('cell-' + key);
-    if (clicked) clicked.classList.add('active');
-
-    const d = details[key];
-    document.getElementById('detail-icon').textContent = d.icon;
-    document.getElementById('detail-title').textContent = d.title;
-    document.getElementById('detail-desc').textContent = d.desc;
-    document.getElementById('detail-badges').innerHTML = d.badges
-      .map(([label, color]) => `<span class="tag tag-${color}">${label}</span>`)
-      .join('');
-
-    const panel = document.getElementById('detail-panel');
-    panel.classList.remove('show');
-    void panel.offsetWidth;
-    panel.classList.add('show');
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  }
+  // Stagger children in grids
+  document.querySelectorAll('.menu-grid .reveal, .bmc-grid .bmc-cell, .bmc-row-bottom .bmc-cell').forEach((el, i) => {
+    el.style.transitionDelay = (i * 0.07) + 's';
+  });
 </script>
 </body>
 </html>
