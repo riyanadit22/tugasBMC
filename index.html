@@ -214,11 +214,17 @@
       transition: transform .25s, box-shadow .25s;
       cursor: default;
     }
-    .menu-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(92,45,14,.12); }
-    .menu-img {
-      height: 180px; background: linear-gradient(135deg, #F5E6D3 0%, #E8C99A 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 5rem; position: relative;
+    .menu-card {
+      text-align: center;
+    }
+    
+    .menu-card img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+      margin: 20px auto 0;
     }
     .menu-label {
       position: absolute; top: 12px; right: 12px;
