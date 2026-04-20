@@ -1,1 +1,635 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BMC Kuliner Bakso Nusantara</title>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --blue-dark:   #1e3a8a;
+      --blue-main:   #2563eb;
+      --blue-mid:    #3b82f6;
+      --blue-light:  #bfdbfe;
+      --blue-soft:   #eff6ff;
+      --blue-bg:     #e8f0fe;
+      --green:       #16a34a;
+      --green-light: #dcfce7;
+      --wa-green:    #25d366;
+      --wa-dark:     #128c7e;
+      --text-dark:   #0f172a;
+      --text-mid:    #1e3a8a;
+      --text-soft:   #64748b;
+      --bg:          #dbeafe;
+      --card-bg:     #ffffff;
+      --border:      #bfdbfe;
+      --radius:      18px;
+      --radius-sm:   10px;
+      --shadow:      0 2px 12px rgba(37,99,235,0.10);
+      --shadow-hover:0 6px 24px rgba(37,99,235,0.18);
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text-dark);
+      min-height: 100vh;
+      padding: 32px 24px 48px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 44px; height: 44px;
+      background: var(--blue-main);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+
+    .logo-text {
+      line-height: 1.2;
+    }
+
+    .logo-text strong {
+      display: block;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--blue-dark);
+    }
+
+    .logo-text span {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--blue-dark);
+      text-align: center;
+      flex: 1;
+    }
+
+    /* ── CONTAINER ── */
+    .bmc-container {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* ── MAIN GRID (mengikuti layout gambar) ──
+       Kolom: [Key Partners] [Key Activities + Key Resources] [Value Proposition] [Customer Relationship + Channels] [Customer Segment]
+    */
+    .bmc-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    /* Key Partners: span 2 rows */
+    #cell-kemitraan { grid-row: span 2; }
+
+    /* Value Proposition: span 2 rows */
+    #cell-nilai { grid-row: span 2; }
+
+    /* Customer Segment: span 2 rows */
+    #cell-segmen { grid-row: span 2; }
+
+    /* ── BOTTOM ROW ── */
+    .bmc-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ── CARD BASE ── */
+    .bmc-cell {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bmc-cell:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--blue-mid);
+    }
+
+    .bmc-cell.active {
+      border: 2px solid var(--blue-main);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-2px);
+    }
+
+    /* top accent bar */
+    .bmc-cell::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-main), var(--blue-mid));
+      opacity: 0;
+      transition: opacity 0.18s;
+    }
+
+    .bmc-cell:hover::after,
+    .bmc-cell.active::after { opacity: 1; }
+
+    /* ── CELL NUMBER BADGE ── */
+    .cell-num {
+      position: absolute;
+      top: 12px; right: 14px;
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--blue-soft);
+      border: 1.5px solid var(--blue-light);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--blue-main);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── CELL ICON ── */
+    .cell-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      background: var(--blue-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin: 0 auto 12px;
+    }
+
+    /* ── CELL TITLE ── */
+    .cell-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 10px;
+      line-height: 1.35;
+      text-align: center;
+    }
+
+    /* ── CELL ITEMS ── */
+    .cell-items { list-style: none; }
+
+    .cell-items li {
+      font-size: 11.5px;
+      color: #334155;
+      padding: 3px 0 3px 13px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .cell-items li::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 9px;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--blue-mid);
+    }
+
+    /* ── TAGS ── */
+    .tag {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 99px;
+      margin: 3px 3px 0 0;
+    }
+
+    .tag-blue   { background: #dbeafe; color: #1e40af; }
+    .tag-teal   { background: #ccfbf1; color: #0f5945; }
+    .tag-amber  { background: #fef3c7; color: #78350f; }
+    .tag-coral  { background: #fee2e2; color: #991b1b; }
+    .tag-green  { background: #dcfce7; color: #14532d; }
+    .tag-orange { background: #ffedd5; color: #c2410c; }
+
+    .badge-row { display: flex; flex-wrap: wrap; margin-top: 8px; justify-content: center; }
+
+    /* ── PROPOSISI NILAI — special dark card ── */
+    #cell-nilai {
+      background: linear-gradient(160deg, #1e3a8a 0%, #1d4ed8 55%, #2563eb 100%);
+      border-color: #1d4ed8;
+    }
+
+    #cell-nilai .cell-icon  { background: rgba(255,255,255,0.15); }
+    #cell-nilai .cell-title { color: #ffffff; font-size: 15px; }
+    #cell-nilai .cell-items li { color: rgba(255,255,255,0.88); }
+    #cell-nilai .cell-items li::before { background: #93c5fd; }
+    #cell-nilai .cell-num   { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.3); color: #fff; }
+    #cell-nilai::after { background: linear-gradient(90deg, #93c5fd, #60a5fa); }
+
+    /* ── BOTTOM BIAYA ── */
+    #cell-biaya {
+      background: linear-gradient(145deg, #fff7ed, #fff);
+      border-color: #fed7aa;
+    }
+    #cell-biaya .cell-title { color: #9a3412; }
+    #cell-biaya .cell-num { background: #fff7ed; border-color: #fed7aa; color: #c2410c; }
+    #cell-biaya::after { background: linear-gradient(90deg, #f97316, #fbbf24); }
+
+    /* ── BOTTOM PENDAPATAN ── */
+    #cell-pendapatan {
+      background: linear-gradient(145deg, #f0fdf4, #fff);
+      border-color: #bbf7d0;
+    }
+    #cell-pendapatan .cell-title { color: #14532d; }
+    #cell-pendapatan .cell-num { background: #f0fdf4; border-color: #bbf7d0; color: #16a34a; }
+    #cell-pendapatan::after { background: linear-gradient(90deg, #16a34a, #22c55e); }
+
+    /* ── DETAIL PANEL ── */
+    #detail-panel {
+      display: none;
+      margin-top: 14px;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border);
+      border-left: 4px solid var(--blue-main);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      box-shadow: var(--shadow);
+      animation: fadeIn 0.22s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    #detail-panel.show { display: block; }
+
+    .detail-header {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+
+    .detail-icon {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      background: var(--blue-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+
+    #detail-panel h3 {
+      font-size: 15px; font-weight: 700; color: var(--blue-dark);
+    }
+
+    #detail-panel p {
+      font-size: 13px; color: #334155;
+      line-height: 1.75;
+      padding-left: 12px;
+      border-left: 3px solid var(--blue-mid);
+      margin-bottom: 10px;
+    }
+
+    /* ── WA BUTTON ── */
+    .wa-section {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--wa-green);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 99px;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+      transition: transform 0.16s, box-shadow 0.16s, background 0.16s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .wa-btn:hover {
+      background: var(--wa-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+    }
+
+    .wa-btn svg {
+      width: 22px; height: 22px; fill: #fff; flex-shrink: 0;
+    }
+
+    .wa-note {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+
+    footer strong { color: var(--blue-main); }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo-area">
+    <div class="logo-icon">🍜</div>
+    <div class="logo-text">
+      <strong>Bakso Nusantara</strong>
+      <span>Kuliner Autentik Indonesia</span>
+    </div>
+  </div>
+  <h1>Business Model Canvas</h1>
+  <div style="width:180px;"></div><!-- spacer -->
+</header>
+
+<div class="bmc-container">
+
+  <!-- MAIN GRID -->
+  <div class="bmc-main">
+
+    <!-- 8. Key Partners / Kemitraan Utama (span 2 rows) -->
+    <div class="bmc-cell" id="cell-kemitraan" onclick="showDetail('kemitraan')">
+      <div class="cell-num">8</div>
+      <div class="cell-icon">🤝</div>
+      <div class="cell-title">Key Partners</div>
+      <ul class="cell-items">
+        <li>Pemasok daging segar</li>
+        <li>Pemasok bumbu &amp; rempah</li>
+        <li>Mitra GoFood / GrabFood</li>
+        <li>Toko kemasan &amp; wadah</li>
+        <li>Usaha minuman / es</li>
+        <li>Penyedia gas &amp; listrik</li>
+      </ul>
+    </div>
+
+    <!-- 7. Key Activities -->
+    <div class="bmc-cell" id="cell-aktivitas" onclick="showDetail('aktivitas')">
+      <div class="cell-num">7</div>
+      <div class="cell-icon">🎯</div>
+      <div class="cell-title">Key Activities</div>
+      <ul class="cell-items">
+        <li>Produksi bakso harian</li>
+        <li>Manajemen stok bahan</li>
+        <li>Pelayanan pelanggan</li>
+        <li>Promosi media sosial</li>
+        <li>Pengelolaan pesanan online</li>
+      </ul>
+    </div>
+
+    <!-- 2. Value Proposition (span 2 rows) -->
+    <div class="bmc-cell" id="cell-nilai" onclick="showDetail('nilai')">
+      <div class="cell-num">2</div>
+      <div class="cell-icon">👍</div>
+      <div class="cell-title">Value Proposition</div>
+      <ul class="cell-items">
+        <li>Bakso handmade autentik</li>
+        <li>Bahan segar &amp; halal</li>
+        <li>Harga terjangkau</li>
+        <li>Varian menu beragam</li>
+        <li>Kuah kaldu kaya rasa</li>
+        <li>Pelayanan cepat</li>
+        <li>Tersedia frozen bakso</li>
+      </ul>
+      <div class="badge-row">
+        <span class="tag" style="background:rgba(255,255,255,0.2);color:#e0f2fe;">Halal</span>
+        <span class="tag" style="background:rgba(255,255,255,0.15);color:#bae6fd;">Segar</span>
+        <span class="tag" style="background:rgba(255,255,255,0.15);color:#fde68a;">Handmade</span>
+      </div>
+    </div>
+
+    <!-- 4. Customer Relationship -->
+    <div class="bmc-cell" id="cell-hubungan" onclick="showDetail('hubungan')">
+      <div class="cell-num">4</div>
+      <div class="cell-icon">🤲</div>
+      <div class="cell-title">Customer Relationship</div>
+      <ul class="cell-items">
+        <li>Layanan ramah langsung</li>
+        <li>Program pelanggan setia</li>
+        <li>Respon cepat di WA / IG</li>
+        <li>Promo member &amp; diskon</li>
+      </ul>
+    </div>
+
+    <!-- 1. Customer Segment (span 2 rows) -->
+    <div class="bmc-cell" id="cell-segmen" onclick="showDetail('segmen')">
+      <div class="cell-num">1</div>
+      <div class="cell-icon">👥</div>
+      <div class="cell-title">Customer Segment</div>
+      <ul class="cell-items">
+        <li>Keluarga &amp; rumah tangga</li>
+        <li>Pelajar &amp; mahasiswa</li>
+        <li>Pekerja kantoran</li>
+        <li>Reseller frozen food</li>
+        <li>Pelanggan online</li>
+        <li>Pengguna ojek online</li>
+      </ul>
+    </div>
+
+    <!-- 6. Key Resources -->
+    <div class="bmc-cell" id="cell-sumber" onclick="showDetail('sumber')">
+      <div class="cell-num">6</div>
+      <div class="cell-icon">🏭</div>
+      <div class="cell-title">Key Resources</div>
+      <ul class="cell-items">
+        <li>Dapur produksi</li>
+        <li>Peralatan memasak</li>
+        <li>Tenaga koki &amp; pramusaji</li>
+        <li>Gerobak / warung</li>
+        <li>Akun media sosial</li>
+      </ul>
+    </div>
+
+    <!-- 3. Channels -->
+    <div class="bmc-cell" id="cell-saluran" onclick="showDetail('saluran')">
+      <div class="cell-num">3</div>
+      <div class="cell-icon">📣</div>
+      <div class="cell-title">Channels</div>
+      <ul class="cell-items">
+        <li>Warung / outlet fisik</li>
+        <li>GoFood &amp; GrabFood</li>
+        <li>WhatsApp &amp; Instagram</li>
+        <li>Catering &amp; event</li>
+        <li>Titipan warung lain</li>
+      </ul>
+    </div>
+
+  </div><!-- /.bmc-main -->
+
+  <!-- BOTTOM ROW -->
+  <div class="bmc-bottom">
+
+    <!-- 9. Cost Structure -->
+    <div class="bmc-cell" id="cell-biaya" onclick="showDetail('biaya')">
+      <div class="cell-num">9</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div class="cell-icon" style="background:#fff7ed;margin:0;width:44px;height:44px;font-size:22px;">💸</div>
+        <div class="cell-title" style="margin:0;text-align:left;">Cost Structure &mdash; Money Out</div>
+      </div>
+      <div class="badge-row" style="justify-content:flex-start;">
+        <span class="tag tag-orange">Daging &amp; bahan baku</span>
+        <span class="tag tag-orange">Gaji karyawan</span>
+        <span class="tag tag-orange">Sewa tempat</span>
+        <span class="tag tag-orange">Gas &amp; listrik</span>
+        <span class="tag tag-orange">Kemasan &amp; peralatan</span>
+        <span class="tag tag-orange">Biaya platform online</span>
+        <span class="tag tag-orange">Promosi &amp; iklan</span>
+      </div>
+    </div>
+
+    <!-- 5. Revenue Streams -->
+    <div class="bmc-cell" id="cell-pendapatan" onclick="showDetail('pendapatan')">
+      <div class="cell-num">5</div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div class="cell-icon" style="background:#f0fdf4;margin:0;width:44px;height:44px;font-size:22px;">💰</div>
+        <div class="cell-title" style="margin:0;text-align:left;">Revenue Streams &mdash; Money In</div>
+      </div>
+      <div class="badge-row" style="justify-content:flex-start;">
+        <span class="tag tag-teal">Penjualan per porsi</span>
+        <span class="tag tag-teal">Penjualan frozen bakso</span>
+        <span class="tag tag-teal">Paket catering</span>
+        <span class="tag tag-teal">Langganan mingguan</span>
+        <span class="tag tag-teal">Kemitraan reseller</span>
+        <span class="tag tag-green">Orderan online (app)</span>
+      </div>
+    </div>
+
+  </div><!-- /.bmc-bottom -->
+
+  <!-- DETAIL PANEL -->
+  <div id="detail-panel">
+    <div class="detail-header">
+      <div class="detail-icon" id="detail-icon"></div>
+      <h3 id="detail-title"></h3>
+    </div>
+    <p id="detail-desc"></p>
+    <div class="badge-row" id="detail-badges" style="justify-content:flex-start;"></div>
+  </div>
+
+  <!-- TOMBOL HUBUNGI WA -->
+  <div class="wa-section">
+    <a class="wa-btn" href="https://wa.me/6281234567890?text=Halo%20Bakso%20Nusantara!%20Saya%20ingin%20memesan%20bakso." target="_blank">
+      <!-- WhatsApp SVG icon -->
+      <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <path d="M16 0C7.163 0 0 7.163 0 16c0 2.822.737 5.469 2.027 7.773L0 32l8.418-2.004A15.938 15.938 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.77-1.852l-.486-.29-5.003 1.191 1.22-4.872-.317-.5A13.27 13.27 0 012.667 16C2.667 8.637 8.637 2.667 16 2.667S29.333 8.637 29.333 16 23.363 29.333 16 29.333zm7.27-9.907c-.398-.199-2.356-1.163-2.72-1.296-.366-.133-.632-.199-.898.199-.266.398-1.03 1.296-1.263 1.562-.232.266-.465.299-.863.1-.398-.199-1.681-.619-3.202-1.977-1.183-1.056-1.982-2.36-2.215-2.758-.232-.398-.025-.614.175-.812.18-.18.398-.465.598-.698.199-.232.265-.398.398-.664.133-.266.066-.498-.033-.697-.1-.199-.898-2.165-1.23-2.964-.323-.778-.653-.672-.898-.684l-.764-.013c-.266 0-.698.1-1.063.498-.366.398-1.396 1.363-1.396 3.323s1.43 3.855 1.629 4.121c.2.266 2.815 4.298 6.82 6.029.953.411 1.697.657 2.277.841.957.304 1.828.261 2.516.158.767-.114 2.356-.964 2.688-1.895.333-.93.333-1.729.233-1.895-.1-.166-.366-.266-.764-.465z"/>
+      </svg>
+      Hubungi Kami via WhatsApp
+    </a>
+    <p class="wa-note">Pemesanan, informasi menu, dan kemitraan reseller</p>
+  </div>
+
+</div><!-- /.bmc-container -->
+
+<footer>
+  &copy; 2025 <strong>Bakso Nusantara</strong> &mdash; Business Model Canvas
+</footer>
+
+<script>
+  const details = {
+    kemitraan: {
+      icon: "🤝",
+      title: "Key Partners — Kemitraan Utama",
+      desc: "Bangun relasi jangka panjang dengan pemasok daging sapi/ayam segar dan terpercaya. Daftarkan usaha di GoFood & GrabFood untuk memperluas jangkauan. Jalin kerjasama dengan produsen kemasan food-grade dan mitra es/minuman untuk paket lengkap.",
+      badges: [["Pemasok Daging","teal"],["Platform Ojol","blue"],["Mitra Kemasan","amber"]]
+    },
+    aktivitas: {
+      icon: "🎯",
+      title: "Key Activities — Aktivitas Utama",
+      desc: "Proses produksi bakso dilakukan setiap hari mulai pagi dengan bahan segar. Kelola stok bahan baku agar tidak boros. Aktif posting konten di Instagram & TikTok setiap hari untuk menarik pelanggan baru. Pastikan semua pesanan online direspons dalam 5 menit.",
+      badges: [["Produksi Harian","teal"],["Social Media","blue"],["QC Kualitas","amber"]]
+    },
+    nilai: {
+      icon: "👍",
+      title: "Value Proposition — Proposisi Nilai",
+      desc: "Keunggulan utama: bakso dibuat dengan tangan (handmade) dari daging sapi pilihan, kuah kaldu alami tanpa MSG berlebih, varian menu lengkap (bakso urat, telur, mercon, kuah spesial), serta tersedia dalam kemasan frozen untuk dibawa pulang atau dijual kembali.",
+      badges: [["Handmade","teal"],["Halal MUI","green"],["No Pengawet","amber"],["Frozen Ready","blue"]]
+    },
+    hubungan: {
+      icon: "🤲",
+      title: "Customer Relationship — Hubungan Pelanggan",
+      desc: "Buat program stamp card — beli 9 porsi gratis 1. Responsif di WhatsApp Business untuk pesanan. Bagikan promo mingguan di status WA dan Instagram Stories. Minta ulasan Google Maps dan balas semua komentar dengan profesional.",
+      badges: [["Stamp Card","teal"],["WA Business","blue"],["Google Review","amber"]]
+    },
+    segmen: {
+      icon: "👥",
+      title: "Customer Segment — Segmen Pelanggan",
+      desc: "Target utama adalah keluarga yang mencari makanan lezat terjangkau, pelajar/mahasiswa di sekitar kampus, dan pekerja untuk makan siang. Segmen sekunder: reseller frozen bakso dan pelanggan katering untuk acara arisan, ulang tahun, dan kantor.",
+      badges: [["Keluarga","teal"],["Mahasiswa","blue"],["Pekerja Kantoran","amber"],["Reseller","coral"]]
+    },
+    sumber: {
+      icon: "🏭",
+      title: "Key Resources — Sumber Daya Utama",
+      desc: "Investasi awal pada dapur produksi yang bersih dan peralatan (mesin penggiling, kompor besar, panci kaldu). Rekrut 1–2 karyawan terlatih. Buat konten foto/video berkualitas untuk media sosial sebagai aset digital. Gerobak atau etalase sebagai wajah brand.",
+      badges: [["Dapur Produksi","teal"],["SDM Terlatih","blue"],["Konten Digital","amber"]]
+    },
+    saluran: {
+      icon: "📣",
+      title: "Channels — Saluran Distribusi",
+      desc: "Outlet fisik sebagai saluran utama. Optimalkan GoFood dan GrabFood dengan foto menu menarik dan rating tinggi. Manfaatkan Instagram & TikTok untuk marketing organik. Tawarkan paket catering untuk event. Titipkan produk frozen ke warung/minimarket sekitar.",
+      badges: [["Outlet Fisik","teal"],["GoFood/Grab","blue"],["IG & TikTok","coral"],["Catering","amber"]]
+    },
+    biaya: {
+      icon: "💸",
+      title: "Cost Structure — Struktur Biaya",
+      desc: "Biaya terbesar adalah bahan baku (daging ~40–50% dari revenue). Kendalikan dengan pembelian dalam jumlah besar dari supplier tetap. Biaya sewa, gaji, dan utilitas bersifat tetap. Biaya platform ojol ~15–20% dari omzet online — perlu diperhitungkan dalam harga jual.",
+      badges: [["COGS ~50%","coral"],["Fixed Cost","amber"],["Biaya Platform","blue"]]
+    },
+    pendapatan: {
+      icon: "💰",
+      title: "Revenue Streams — Arus Pendapatan",
+      desc: "Pendapatan utama dari penjualan per porsi (Rp 15.000–35.000). Diversifikasi dengan frozen bakso (margin lebih tinggi), paket catering (volume besar), dan sistem langganan mingguan. Kemitraan reseller membuka pendapatan B2B tanpa harus melayani langsung.",
+      badges: [["Per Porsi","teal"],["Frozen Pack","blue"],["Catering","amber"],["Reseller B2B","coral"]]
+    }
+  };
+
+  function showDetail(key) {
+    document.querySelectorAll('.bmc-cell').forEach(el => el.classList.remove('active'));
+    const clicked = document.getElementById('cell-' + key);
+    if (clicked) clicked.classList.add('active');
+
+    const d = details[key];
+    document.getElementById('detail-icon').textContent = d.icon;
+    document.getElementById('detail-title').textContent = d.title;
+    document.getElementById('detail-desc').textContent = d.desc;
+    document.getElementById('detail-badges').innerHTML = d.badges
+      .map(([label, color]) => `<span class="tag tag-${color}">${label}</span>`)
+      .join('');
+
+    const panel = document.getElementById('detail-panel');
+    panel.classList.remove('show');
+    void panel.offsetWidth;
+    panel.classList.add('show');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+</body>
+</html>
